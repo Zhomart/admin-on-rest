@@ -12,7 +12,7 @@ import { all, fork } from 'redux-saga/effects';
 import { USER_LOGOUT } from './actions/authActions';
 import adminReducer from './reducer';
 import localeReducer from './reducer/locale';
-import { crudSaga } from './sideEffect/saga';
+import { crudSaga, formsSaga } from './sideEffect/saga';
 import DefaultLayout from './mui/layout/Layout';
 import Menu from './mui/layout/Menu';
 import Login from './mui/auth/Login';
@@ -50,6 +50,7 @@ const Admin = ({
     const saga = function* rootSaga() {
         yield all([
             crudSaga(restClient, authClient),
+            formsSaga,
             ...customSagas,
         ].map(fork));
     };

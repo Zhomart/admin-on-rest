@@ -87,13 +87,8 @@ TabbedForm.defaultProps = {
 
 const enhance = compose(
     connect((state, props) => {
-        const children = Children.toArray(props.children).reduce((acc, child) => [
-            ...acc,
-            ...Children.toArray(child.props.children),
-        ], []);
-
         return {
-            initialValues: getDefaultValues(state, { ...props, children }),
+            initialValues: getDefaultValues(state, props),
         };
     }),
     reduxForm({

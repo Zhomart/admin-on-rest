@@ -5,19 +5,46 @@ import getDefaultValues from './getDefaultValues';
 describe('getDefaultValues', () => {
     it('should get defaults values from form correctly', () => {
         const someTitle = 'some value';
-        const formElements = {
-            children: [
-                createElement('input', { defaultValue: someTitle, source: 'title' }),
-                createElement('input', { defaultValue: someTitle, source: 'nested.title' }),
-            ],
-        };
+
         const expectedResult = {
+            aField: 'aValue',
             title: someTitle,
             nested: {
                 title: someTitle,
             },
         };
-        const defaultValuesResult = getDefaultValues({}, formElements);
+        const defaultValuesResult = getDefaultValues({}, {
+            record: { aField: 'aValue' },
+            defaultValue: {
+                aField: 'aDefaultValue',
+                title: someTitle,
+                    nested: {
+                    title: someTitle,
+                },
+            },
+        });
+        assert.deepEqual(defaultValuesResult, expectedResult);
+    });
+    it('should get defaults values from form correctly when defaultValue is a function', () => {
+        const someTitle = 'some value';
+
+        const expectedResult = {
+            aField: 'aValue',
+            title: someTitle,
+            nested: {
+                title: someTitle,
+            },
+        };
+        const defaultValuesResult = getDefaultValues({}, {
+            record: { aField: 'aValue' },
+            defaultValue: () => ({
+                aField: 'aDefaultValue',
+                title: someTitle,
+                nested: {
+                    title: someTitle,
+                },
+            }),
+        });
         assert.deepEqual(defaultValuesResult, expectedResult);
     });
 });
