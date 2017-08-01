@@ -24,7 +24,7 @@ export class FormFieldComponent extends Component {
             }
 
             this.props.initializeForm(
-                { [this.props.input.props.source]: this.props.input.props.defaultValue },
+                { [this.props.input.props.source]: defaultValue },
             );
         }
     }
