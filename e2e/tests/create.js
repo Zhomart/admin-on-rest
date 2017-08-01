@@ -4,7 +4,7 @@ import driver from '../chromeDriver';
 import createPageFactory from '../pages/CreatePage';
 import deletePageFactory from '../pages/DeletePage';
 
-describe.only('Create Page', () => {
+describe('Create Page', () => {
     const CreatePage = createPageFactory('http://localhost:8083/#/posts/create')(driver);
     const DeletePage = deletePageFactory('http://localhost:8083/#/posts/14/delete')(driver);
 
